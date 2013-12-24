@@ -1,0 +1,5 @@
+librb_mac_vendors.a
+librb_mac_vendors.so.0
+rb_mac_vendors.d
+rb_mac_vendors.o
+example
