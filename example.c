@@ -17,7 +17,7 @@ int main(int argc,char *argv[])
 	}
 	else
 	{
-		struct mac_vendor_database *db = rb_new_mac_vendor_avl(argv[1]);
+		struct mac_vendor_database *db = rb_new_mac_vendor_db(argv[1]);
 		if(argc==2)
 		{
 			// known MACs
@@ -34,7 +34,7 @@ int main(int argc,char *argv[])
 				printf("%s vendor: %s\n",argv[i],rb_find_mac_vendor(mac_prefix,db));
 			}
 		}
-		rb_destroy_mac_vendor_avl(db);
+		rb_destroy_mac_vendor_db(db);
 	}
 
 	return 0;

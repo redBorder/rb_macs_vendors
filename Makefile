@@ -8,8 +8,12 @@ SRCS= rb_mac_vendors.c
 HDRS= rb_mac_vendors.h
 OBJS= $(SRCS:.c=.o)
 
-#CFLAGS=-O3 -Wall -Werror -fPIC -DNDEBUG 
-CFLAGS=-O0 -Wall -Werror -fPIC -g
+CFLAGS=-O3 -Wall -Werror -fPIC -DNDEBUG 
+#CFLAGS=-O0 -Wall -Werror -fPIC -g
+
+# If you have librd in another location
+CFLAGS+=-I/opt/rb/include
+LDFLAGS+=-L/opt/rb/lib/
 
 all: libs
 libs: $(LIBNAME).so.$(LIBVER) $(LIBNAME).a
@@ -18,8 +22,8 @@ libs: $(LIBNAME).so.$(LIBVER) $(LIBNAME).a
 	$(CC) -MD -MP $(CFLAGS) -c $<
 
 $(LIBNAME).so.$(LIBVER): $(OBJS)
-	$(CC) $(LDFLAGS) -shared -Wl,-soname,$@ \
-	$(OBJS) -o $@ -lrd -lrt -lz
+	$(CC) -shared -Wl,-soname,$@ \
+	$(OBJS) -o $@ $(LDFLAGS) -lrd -lrt -lz
 
 $(LIBNAME).a: $(OBJS)
 	$(AR) rcs $@ $(OBJS)
