@@ -37,7 +37,7 @@ static inline int mac_vendor_cmp(const void *_node1,const void *_node2)
   return node2->mac_prefix > node1->mac_prefix ? 1 : node2->mac_prefix < node1->mac_prefix ? -1 : 0;
 }
 
-struct mac_vendor_database *rb_new_mac_vendor_avl(const char * filename)
+struct mac_vendor_database *rb_new_mac_vendor(const char * filename)
 {
   rd_memctx_init(&mac_vendor_mem,"",RD_MEMCTX_F_TRACK);
 
@@ -94,7 +94,7 @@ struct mac_vendor_database *rb_new_mac_vendor_avl(const char * filename)
   return db;
 }
 
-void rb_destroy_mac_vendor_avl(struct mac_vendor_database *db)
+void rb_destroy_mac_vendor(struct mac_vendor_database *db)
 {
   if(RD_MEMCTX_INITED(&mac_vendor_mem))
   {
