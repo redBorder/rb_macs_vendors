@@ -31,10 +31,11 @@ $(LIBNAME).a: $(OBJS)
 install: $(LIBNAME).so.$(LIBVER) $(LIBNAME).a
 	install -t $(DESTDIR)/include $(HDRS)
 	install -t $(DESTDIR)/lib $(LIBNAME).a
+	install -t $(DESTDIR)/lib $(LIBNAME).so.$(LIBVER)
 	cd $(DESTDIR)/lib && ln -sf $(LIBNAME).so.$(LIBVER) $(LIBNAME).so
 
 example: example.c $(LIBNAME).a $(HDRS)
-	$(CC) $(CFLAGS) -o $@ $< $(LIBNAME).a -lrd -lrt -lz
+	$(CC) $(CFLAGS) -o $@ $< $(LIBNAME).a $(LDFLAGS) -lrd -lrt -lz
 
 clean:
 	rm -rf $(OBJS) example $(LIBNAME).a $(LIBNAME).so.$(LIBVER)
