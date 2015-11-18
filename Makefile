@@ -8,6 +8,9 @@ SRCS= rb_mac_vendors.c
 HDRS= rb_mac_vendors.h
 OBJS= $(SRCS:.c=.o)
 
+# Allow to compile statically
+LIBRD ?= -lrd
+
 CPPFLAGS+=-O3 -Wall -Werror -fPIC -DNDEBUG
 #CFLAGS=-O0 -Wall -Werror -fPIC -g
 
@@ -19,7 +22,7 @@ libs: $(LIBNAME).so.$(LIBVER) $(LIBNAME).a
 
 $(LIBNAME).so.$(LIBVER): $(OBJS)
 	$(CC) -shared -Wl,-soname,$@ \
-	$(OBJS) -o $@ $(LDFLAGS) -lrd -lrt -lz
+	$(OBJS) -o $@ $(LDFLAGS) $(LIBRD) -lrt -lz
 
 $(LIBNAME).a: $(OBJS)
 	$(AR) rcs $@ $(OBJS)
@@ -31,7 +34,7 @@ install: $(LIBNAME).so.$(LIBVER) $(LIBNAME).a
 	cd $(DESTDIR)/lib && ln -sf $(LIBNAME).so.$(LIBVER) $(LIBNAME).so
 
 example: example.c $(LIBNAME).a $(HDRS)
-	$(CC) $(CPPFLAGS) -o $@ $< $(LIBNAME).a $(LDFLAGS) -lrd -lrt -lz
+	$(CC) $(CPPFLAGS) -o $@ $< $(LIBNAME).a $(LDFLAGS) $(LIBRD) -lrt -lz
 
 clean:
 	rm -rf $(OBJS) example $(LIBNAME).a $(LIBNAME).so.$(LIBVER)
