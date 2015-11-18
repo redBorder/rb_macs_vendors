@@ -8,7 +8,7 @@ SRCS= rb_mac_vendors.c
 HDRS= rb_mac_vendors.h
 OBJS= $(SRCS:.c=.o)
 
-CFLAGS=-O3 -Wall -Werror -fPIC -DNDEBUG 
+CFLAGS+=-O3 -Wall -Werror -fPIC -DNDEBUG
 #CFLAGS=-O0 -Wall -Werror -fPIC -g
 
 # If you have librd in another location
