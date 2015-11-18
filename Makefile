@@ -1,5 +1,5 @@
 
-DESTDIR=/opt/rb
+DESTDIR?=/usr/local
 
 LIBNAME=librb_mac_vendors
 LIBVER=0
