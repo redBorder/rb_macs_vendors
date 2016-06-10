@@ -38,3 +38,6 @@ example: example.c $(LIBNAME).a $(HDRS)
 
 clean:
 	rm -rf $(OBJS) example $(LIBNAME).a $(LIBNAME).so.$(LIBVER)
+
+rpm: clean
+	$(MAKE) -C packaging/rpm
