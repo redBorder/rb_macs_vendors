@@ -15,6 +15,8 @@ Requires: librd0
 %description
 %{summary}
 
+%global debug_package %{nil}
+
 %prep
 %setup -qn %{name}-%{version}
 
